@@ -3,6 +3,8 @@
         <commentsItem 
             v-for="(item, index) in commentsToShow" :key="index"
             :item="comments[index]"
+            :deepCounter="deepCounter"
+            @addComment="addComment"
         />
         <div v-if="commentsToShow < totalComments" class="show-more" @click="addToShow">
             Показать еще
@@ -20,6 +22,7 @@ export default {
     return {
         commentsToShow: 3,
         totalComments: 0,
+        deepCounter: 0,
         comments: [],
         // comments: [
         //     {
@@ -69,6 +72,10 @@ export default {
   methods: {
       addToShow(){
           this.commentsToShow += 3
+      },
+      addComment(parentId, payload){
+          console.log(this.comments);
+          console.log(parentId, payload);
       }
   },
   mounted() {
