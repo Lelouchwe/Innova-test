@@ -3,8 +3,6 @@
         <commentsItem 
             v-for="(item, index) in commentsToShow" :key="index"
             :item="comments[index]"
-            :deepCounter="deepCounter"
-            @addComment="addComment"
         />
         <div v-if="commentsToShow < totalComments" class="show-more" @click="addToShow">
             Показать еще
@@ -22,49 +20,8 @@ export default {
     return {
         commentsToShow: 3,
         totalComments: 0,
-        deepCounter: 0,
+        // deepCounter: 0,
         comments: [],
-        // comments: [
-        //     {
-        //     id: 1,
-        //     name: 'john',
-        //     content: 'something text here',
-        //     child: [
-        //         {
-        //         id: 12,
-        //         name: 'john',
-        //         content: 'something text here',
-        //         child: [
-        //             {
-        //             id: 12,
-        //             name: 'john',
-        //             content: 'something text here'
-        //             },
-        //             {
-        //             id: 13,
-        //             name: 'john',
-        //             content: 'something text here'
-        //             },
-        //         ]
-        //         },
-        //         {
-        //         id: 13,
-        //         name: 'john',
-        //         content: 'something text here'
-        //         },
-        //     ]
-        //     },
-        //     {
-        //     id: 2,
-        //     name: 'wick',
-        //     content: 'something text here'
-        //     },
-        //     {
-        //     id: 3,
-        //     name: 'ger',
-        //     content: 'something text here'
-        //     },
-        // ],
     }
   },
   computed: {
@@ -73,15 +30,10 @@ export default {
       addToShow(){
           this.commentsToShow += 3
       },
-      addComment(parentId, payload){
-          console.log(this.comments);
-          console.log(parentId, payload);
-      }
   },
   mounted() {
       this.totalComments = commentsJson.length
       this.comments = commentsJson
-    //   console.log(commentsJson);
   }
 
 }

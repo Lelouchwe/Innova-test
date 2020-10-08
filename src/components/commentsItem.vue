@@ -33,8 +33,8 @@
                 v-for="(sub, index) in item.child" :key="index" 
                 class="sub-comments"
                 :item="sub"
-                :deepCounter="deepCounter"
             />
+            <!-- <div v-if="item.child.length" @click="allComments">show more</div> -->
         </div>
         <transition name="popup">
             <div v-if="reportState" class="report">
@@ -52,27 +52,30 @@ export default {
     props: ['item'],
     data() {
         return {
-            deepCounter: 0,
+            deepCounter: 1,
             answerToggle: false,
             answerText: '',
             reportState: false,
+            totalDeep: 0,
         }
     },
     computed: {
         activeColor(){
             return this.item.likeCounter < 0? 'red' : 'rgb(72, 235, 72)'
-        },
-        increaseCounter(){
-            this.deepCounter++
-        },
+        }
     },
     methods: {
+        allComments() {
+            this.deepCounter = this.totalDeep
+        },
         sentMessage(parentName) {
             let id = Math.floor(Math.random()*10000)
             let payload = {
                 id: id,
                 name: `anon#${id}`,
                 content: `${parentName}, ${this.answerText}`,
+                likeCounter: 0,
+                spoiler: false,
                 child: []
             }
             this.item.child.push(payload)
@@ -107,7 +110,7 @@ export default {
         }
     },
     mounted(){
-        this.deepCounter++
+        this.totalDeep = this.item.child.length
     }
 
 }
