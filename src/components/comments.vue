@@ -3,6 +3,7 @@
         <commentsItem 
             v-for="(item, index) in commentsToShow" :key="index"
             :item="comments[index]"
+            :toggle="true"
         />
         <div v-if="commentsToShow < totalComments" class="show-more" @click="addToShow">
             Показать еще

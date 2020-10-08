@@ -28,14 +28,31 @@
                 </div>
             </div>
         </div>
-        <div class="child-comment" v-if="item.child">
-            <commentsItem 
+        
+        <div class="child-comment" v-if="item.child.length">
+            <!-- <commentsItem 
+            v-for="(sub, index) in item.child" :key="index" 
+            class="sub-comments"
+            :item="sub"
+            /> -->
+            <div v-if="deepToggle">
+                <!-- <commentsItem 
+                v-for="(sub, index) in deepCounter" :key="index" 
+                class="sub-comments"
+                :item="item.child[index]"
+                /> -->
+                <commentsItem 
                 v-for="(sub, index) in item.child" :key="index" 
                 class="sub-comments"
                 :item="sub"
-            />
-            <!-- <div v-if="item.child.length" @click="allComments">show more</div> -->
+                :toggle="false"
+                />
+                
+            </div>
+            <!-- <div v-if="item.child.length" @click="allComments">Показать еще</div> -->
+            
         </div>
+        <div class="btn-left" v-if="!toggle && childLength" @click="allComments">Показать еще</div>
         <transition name="popup">
             <div v-if="reportState" class="report">
                 <div>
@@ -49,7 +66,13 @@
 <script>
 export default {
     name: 'commentsItem',
-    props: ['item'],
+    props: {
+        item: Object,
+        toggle: {
+            type: Boolean,
+            default: true
+        }
+    },
     data() {
         return {
             deepCounter: 1,
@@ -57,16 +80,26 @@ export default {
             answerText: '',
             reportState: false,
             totalDeep: 0,
+            deepThree: 0,
+            // deepToggle2: true,
+            // toggle: false
         }
     },
     computed: {
+        deepToggle(){
+            return this.toggle
+        },
         activeColor(){
             return this.item.likeCounter < 0? 'red' : 'rgb(72, 235, 72)'
+        },
+        childLength(){
+            return this.item.child.length
         }
     },
     methods: {
         allComments() {
-            this.deepCounter = this.totalDeep
+            // this.deepCounter = this.totalDeep
+            this.toggle = true
         },
         sentMessage(parentName) {
             let id = Math.floor(Math.random()*10000)
@@ -97,20 +130,21 @@ export default {
                 setTimeout(() => {
                     resolve()
                     this.reportState = true
-                    console.log(this.reportState);
                 }, 500)
             })
             return await new Promise(resolve => {
                 setTimeout(() => {
                     resolve()
                     this.reportState = false
-                    console.log(this.reportState);
                 }, 1000)
             })
         }
     },
     mounted(){
         this.totalDeep = this.item.child.length
+        this.deepThree++
+        // if(this.toggle)
+        //     this.deepToggle = this.toggle
     }
 
 }
@@ -163,7 +197,7 @@ export default {
     font-size: 14px;
 }
 .comment-nav div {
-    padding: 0 10px;
+    padding: 0 10px 0 0;
 }
 .comment-nav__answere {
     cursor: pointer;
@@ -194,6 +228,15 @@ export default {
   cursor: pointer;
 }
 .btn:hover {
+  opacity: .8;
+}
+.btn-left {
+    cursor: pointer;
+    text-align: left;
+    padding: 10px;
+    color: #7f9dca;
+}
+.btn-left:hover {
   opacity: .8;
 }
 .spoiler {
