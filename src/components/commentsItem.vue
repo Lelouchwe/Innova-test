@@ -30,26 +30,14 @@
         </div>
         
         <div class="child-comment" v-if="item.child.length">
-            <!-- <commentsItem 
-            v-for="(sub, index) in item.child" :key="index" 
-            class="sub-comments"
-            :item="sub"
-            /> -->
             <div v-if="deepToggle">
-                <!-- <commentsItem 
-                v-for="(sub, index) in deepCounter" :key="index" 
-                class="sub-comments"
-                :item="item.child[index]"
-                /> -->
                 <commentsItem 
-                v-for="(sub, index) in item.child" :key="index" 
-                class="sub-comments"
-                :item="sub"
-                :toggle="false"
+                    v-for="(sub, index) in item.child" :key="index" 
+                    class="sub-comments"
+                    :item="sub"
+                    :toggle="false"
                 />
-                
             </div>
-            <!-- <div v-if="item.child.length" @click="allComments">Показать еще</div> -->
             
         </div>
         <div class="btn-left" v-if="!toggle && childLength" @click="allComments">Показать еще</div>
@@ -81,8 +69,6 @@ export default {
             reportState: false,
             totalDeep: 0,
             deepThree: 0,
-            // deepToggle2: true,
-            // toggle: false
         }
     },
     computed: {
@@ -98,7 +84,6 @@ export default {
     },
     methods: {
         allComments() {
-            // this.deepCounter = this.totalDeep
             this.toggle = true
         },
         sentMessage(parentName) {
@@ -143,8 +128,6 @@ export default {
     mounted(){
         this.totalDeep = this.item.child.length
         this.deepThree++
-        // if(this.toggle)
-        //     this.deepToggle = this.toggle
     }
 
 }
