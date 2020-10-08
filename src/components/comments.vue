@@ -1,10 +1,10 @@
 <template>
   <div class="container">
         <commentsItem 
-            v-for="(item, index) in comments" :key="index"
-            :item="item"
+            v-for="(item, index) in commentsToShow" :key="index"
+            :item="comments[index]"
         />
-        <div class="show-more">
+        <div v-if="commentsToShow < totalComments" class="show-more" @click="addToShow">
             Показать еще
         </div>
   </div>
@@ -18,54 +18,63 @@ export default {
   },
   data() {
     return {
-      comments: [
-        {
-          id: 1,
-          name: 'john',
-          content: 'something text here',
-          child: [
-            {
-              id: 12,
-              name: 'john',
-              content: 'something text here',
-              child: [
-                {
-                id: 12,
-                name: 'john',
-                content: 'something text here'
-                },
-                {
-                id: 13,
-                name: 'john',
-                content: 'something text here'
-                },
-            ]
-            },
-            {
-              id: 13,
-              name: 'john',
-              content: 'something text here'
-            },
-          ]
-        },
-        {
-          id: 2,
-          name: 'wick',
-          content: 'something text here'
-        },
-        {
-          id: 3,
-          name: 'ger',
-          content: 'something text here'
-        },
-      ],
+        commentsToShow: 3,
+        totalComments: 0,
+        comments: [],
+        // comments: [
+        //     {
+        //     id: 1,
+        //     name: 'john',
+        //     content: 'something text here',
+        //     child: [
+        //         {
+        //         id: 12,
+        //         name: 'john',
+        //         content: 'something text here',
+        //         child: [
+        //             {
+        //             id: 12,
+        //             name: 'john',
+        //             content: 'something text here'
+        //             },
+        //             {
+        //             id: 13,
+        //             name: 'john',
+        //             content: 'something text here'
+        //             },
+        //         ]
+        //         },
+        //         {
+        //         id: 13,
+        //         name: 'john',
+        //         content: 'something text here'
+        //         },
+        //     ]
+        //     },
+        //     {
+        //     id: 2,
+        //     name: 'wick',
+        //     content: 'something text here'
+        //     },
+        //     {
+        //     id: 3,
+        //     name: 'ger',
+        //     content: 'something text here'
+        //     },
+        // ],
     }
   },
+  computed: {
+  },
   methods: {
-
+      addToShow(){
+          this.commentsToShow += 3
+      }
   },
   mounted() {
-      console.log(commentsJson);
+      this.totalComments = commentsJson.length
+      this.comments = commentsJson
+    //   console.log(commentsJson);
   }
 
 }
