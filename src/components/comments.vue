@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-        commentsToShow: 3,
+        commentsToShow: 5,
         totalComments: 0,
         // deepCounter: 0,
         comments: [],
@@ -41,8 +41,14 @@ export default {
 </script>
 
 <style>
+.container {
+    /* width: 100%; */
+}
+h1, p {
+    text-align: left;
+}
 .sub-comments {
-    margin: 0 20px;
+    margin: 0 0 0 20px;
 }
 .show-more {
     margin-top: 20px;

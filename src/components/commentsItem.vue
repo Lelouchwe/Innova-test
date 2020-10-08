@@ -133,9 +133,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .sub-comments {
-  margin: 0 20px;
+  margin: 0 0 0 25px;
 }
 .show-more {
   cursor: pointer;
@@ -144,12 +144,13 @@ export default {
   opacity: .8;
 }
 .comment-item {
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     transition: .3s;
     border-radius: 10px;
 }
 .comment-item p {
-    font-size: 16px;
+    font-size: 18px;
+    margin: 7px 0;
 }
 .comment-item:hover {
     /* background: #8080800c; */
@@ -158,6 +159,11 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.comment-item__wrap h1 {
+    line-height: 0.9em;
+    margin: 0;
+    font-size: 1.5em;
 }
 .comment-item__likes {
     display: flex;
@@ -177,7 +183,8 @@ export default {
 }
 .comment-nav {
     display: flex;
-    font-size: 14px;
+    font-size: 0.9em;
+    color: gray;
 }
 .comment-nav div {
     padding: 0 10px 0 0;
@@ -192,14 +199,18 @@ export default {
 .wrap-answere {
     display: flex;
     flex-direction: column;
-    border: 1px solid;
+    border: 1px solid gray;
     border-radius: 10px;
-    padding: 5px;
+    padding: 13px 13px 0 13px;
+    margin: 5px 0 0 0;
+    font-size: 14px;
 }
 .wrap-answere__text {
     height: 100px;
     margin: 0px;
     border: none;
+    font-size: 18px;
+    outline: none;
 }
 .wrap-answere__nav {
     display: flex;
