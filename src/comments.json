@@ -3,22 +3,30 @@
         "id": 1,
         "name": "John",
         "content": "something text here",
+        "likeCounter": -4,
+        "spoiler": false,
         "child": [
           {
             "id": 12,
             "name": "john",
             "content": "something text here",
+            "likeCounter": 5,
+            "spoiler": false,
             "child": [
               {
                 "id": 123,
                 "name": "john",
                 "content": "something text here",
+                "likeCounter": 0,
+                "spoiler": false,
                 "child": []
               },
               {
                 "id": 124,
                 "name": "john",
                 "content": "something text here",
+                "likeCounter": 0,
+                "spoiler": false,
                 "child": []
               }
           ]
@@ -27,6 +35,8 @@
             "id": 13,
             "name": "john",
             "content": "something text here",
+            "likeCounter": 1,
+            "spoiler": false,
             "child": []
           }
         ]
@@ -35,34 +45,46 @@
         "id": 2,
         "name": "Wick",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": []
     },
     {
         "id": 3,
         "name": "Geor",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": []
     },
     {
         "id": 11,
         "name": "John",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": [
           {
             "id": 124,
             "name": "john",
             "content": "something text here",
+            "likeCounter": 0,
+            "spoiler": false,
             "child": [
               {
                 "id": 126,
                 "name": "john",
                 "content": "something text here",
+                "likeCounter": 0,
+                "spoiler": false,
                 "child": []
               },
               {
                 "id": 125,
                 "name": "john",
                 "content": "something text here",
+                "likeCounter": 0,
+                "spoiler": false,
                 "child": []
               }
           ]
@@ -71,6 +93,8 @@
             "id": 1254,
             "name": "john",
             "content": "something text here",
+            "likeCounter": 0,
+            "spoiler": false,
             "child": []
           }
         ]
@@ -79,34 +103,47 @@
         "id": 2324,
         "name": "Wick",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": []
     },
     {
         "id": 3432,
         "name": "Geor",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": []
     },
     {
         "id": 4321,
         "name": "John",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": [
           {
             "id": 12563,
             "name": "john",
             "content": "something text here",
+            "likeCounter": 0,
+            "spoiler": false,
             "child": [
               {
                 "id": 1243345,
                 "name": "john",
                 "content": "something text here",
+                "likeCounter": 0,
+                "spoiler": false,
                 "child": []
+
               },
               {
                 "id": 1223243,
                 "name": "john",
                 "content": "something text here",
+                "likeCounter": 0,
+                "spoiler": false,
                 "child": []
               }
           ]
@@ -115,6 +152,8 @@
             "id": 1232434,
             "name": "john",
             "content": "something text here",
+            "likeCounter": 0,
+            "spoiler": false,
             "child": []
           }
         ]
@@ -123,12 +162,16 @@
         "id": 2342434,
         "name": "Wick",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": []
     },
     {
         "id": 334234233,
         "name": "Geor",
         "content": "something text here",
+        "likeCounter": 0,
+        "spoiler": false,
         "child": []
     }
 ]
