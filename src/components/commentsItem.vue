@@ -97,6 +97,7 @@ export default {
             this.item.child.push(payload)
             this.answerText = ''
             this.answerToggle = false
+            this.childProp = true
         },
         cancelMessage() {
             this.answerText = ''
