@@ -36,7 +36,7 @@
             "name": "john",
             "content": "something text here",
             "likeCounter": 1,
-            "spoiler": false,
+            "spoiler": true,
             "child": []
           }
         ]
@@ -54,7 +54,7 @@
         "name": "Geor",
         "content": "something text here",
         "likeCounter": 0,
-        "spoiler": false,
+        "spoiler": true,
         "child": []
     },
     {
