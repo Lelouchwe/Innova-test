@@ -5,15 +5,15 @@
                 <h1>{{item.name}}</h1>
                 <div class="comment-item__likes">
                     <div class="like" @click="setLike">↑</div>
-                    <div :style='{color: activeColor}'>{{item.likeCounter}}</div>
+                    <div :style='{color: activeColor}'>{{likeCounter}}</div>
                     <div class="dislike" @click="setDislike">↓</div>
                 </div>
             </div>
-            <p :class="[item.spoiler? 'spoiler': '']">{{item.content}}</p>
+            <p :class="[spoiler? 'spoiler': '']">{{item.content}}</p>
             <div class="comment-nav">
                 <div class="comment-nav__answere" @click="answerToggle = !answerToggle">Ответить</div>
-                <div v-if="!item.spoiler" class="btn" @click="item.spoiler = !item.spoiler">Спойлер</div>
-                <div v-else class="btn" @click="item.spoiler = !item.spoiler">Показать спойлер</div>
+                <div v-if="!spoiler" class="btn" @click="setSpoiler">Спойлер</div>
+                <div v-else class="btn" @click="setSpoiler">Показать спойлер</div>
                 <div class="btn" @click="report(item.id)">Пожаловаться</div>
             </div>
             <div v-if="answerToggle" class="wrap-answere">
@@ -23,19 +23,20 @@
                     class="wrap-answere__text" 
                 />
                 <div class="wrap-answere__nav">
-                    <div class="sent btn" @click="sentMessage(item.name)">Отправить</div>
+                    <div class="sent btn" @click="sentMessage(item.id, item.name)">Отправить</div>
                     <div class="close btn" @click="cancelMessage">Отменить</div>
                 </div>
             </div>
         </div>
         
-        <div class="child-comment" v-if="item.child.length">
+        <div class="child-comment" v-if="childsComments.length">
             <div v-if="childProp">
                 <commentsItem 
-                    v-for="(sub, index) in item.child" :key="index" 
+                    v-for="(sub, index) in childsComments" :key="index" 
                     class="sub-comments"
                     :item="sub"
                     :toggle="!deepToggle"
+                    :childs="childs"
                 />
             </div>
             
@@ -59,7 +60,8 @@ export default {
         toggle: {
             type: Boolean,
             default: true
-        }
+        },
+        childs: Array
     },
     data() {
         return {
@@ -67,6 +69,8 @@ export default {
             answerText: '',
             reportState: false,
             childProp: true,
+            likeCounter: this.item.likeCounter,
+            spoiler: this.item.spoiler
         }
     },
     computed: {
@@ -74,27 +78,31 @@ export default {
             return this.childProp = this.toggle
         },
         activeColor(){
-            return this.item.likeCounter < 0? 'red' : 'rgb(72, 235, 72)'
+            return this.likeCounter < 0? 'red' : 'rgb(72, 235, 72)'
         },
         childLength(){
-            return this.item.child.length
+            return this.childsComments.length
+        },
+        childsComments(){
+            return this.childs? this.childs.filter( item => item.parentId === this.item.id) : []
         }
     },
     methods: {
         allComments() {
             this.childProp = !this.childProp
         },
-        sentMessage(parentName) {
+        sentMessage(parentId, parenName) {
             let id = Math.floor(Math.random()*10000)
             let payload = {
                 id: id,
+                parentId: parentId,
                 name: `anon#${id}`,
-                content: `${parentName}, ${this.answerText}`,
+                content: `${parenName}, ${this.answerText}`,
                 likeCounter: 0,
                 spoiler: false,
                 child: []
             }
-            this.item.child.push(payload)
+            this.childsComments.push(payload)
             this.answerText = ''
             this.answerToggle = false
             this.childProp = true
@@ -104,10 +112,13 @@ export default {
             this.answerToggle = false
         },
         setLike() {
-            this.item.likeCounter ++
+            return this.likeCounter ++
+        },
+        setSpoiler() {
+            return this.spoiler = !this.spoiler
         },
         setDislike() {
-            this.item.likeCounter --
+            return this.likeCounter --
         },
         async report(itemId){
             await new Promise(resolve => {
@@ -123,10 +134,7 @@ export default {
                 }, 1000)
             })
         }
-    },
-    mounted(){
     }
-
 }
 </script>
 
@@ -148,9 +156,6 @@ export default {
 .comment-item p {
     font-size: 18px;
     margin: 7px 0;
-}
-.comment-item:hover {
-    /* background: #8080800c; */
 }
 .comment-item__wrap {
     display: flex;

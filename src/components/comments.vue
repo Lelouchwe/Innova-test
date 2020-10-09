@@ -4,6 +4,7 @@
             v-for="(item, index) in commentsToShow" :key="index"
             :item="comments[index]"
             :toggle="true"
+            :childs="childComments"
         />
         <div v-if="commentsToShow < totalComments" class="show-more" @click="addToShow">
             Показать еще
@@ -12,30 +13,40 @@
 </template>
 
 <script>
-import commentsJson from "@/comments.json"
+import commentsJson from "@/comments2.json"
 export default {
-  components: {
-      commentsItem: () => import('@/components/commentsItem.vue')
-  },
-  data() {
-    return {
-        commentsToShow: 5,
-        totalComments: 0,
-        // deepCounter: 0,
-        comments: [],
+    components: {
+        commentsItem: () => import('@/components/commentsItem.vue')
+    },
+    data() {
+        return {
+            commentsToShow: 3,
+        }
+    },
+    computed: {
+            comments(){
+                return commentsJson.filter( item => !item.parentId)
+            },
+            childComments(){
+                return commentsJson.filter( item => item.parentId)
+            },
+            totalComments(){
+                return this.comments.length
+            }
+    },
+    methods: {
+            addToShow(){
+                this.commentsToShow + 3 <= this.totalComments ? 
+                this.commentsToShow += 3 : 
+                this.commentsToShow += this.totalComments-this.commentsToShow
+            },
+            setSpoiler(id){
+                console.log(id);
+                // let item = this.childComments.find( item => item.id === id)
+                console.log(this.childComments);
+                // return item.spoiler = !item.spoiler
+            }
     }
-  },
-  computed: {
-  },
-  methods: {
-      addToShow(){
-          this.commentsToShow += 3
-      },
-  },
-  mounted() {
-      this.totalComments = commentsJson.length
-      this.comments = commentsJson
-  }
 
 }
 </script>
