@@ -30,17 +30,17 @@
         </div>
         
         <div class="child-comment" v-if="item.child.length">
-            <div v-if="deepToggle">
+            <div v-if="childProp">
                 <commentsItem 
                     v-for="(sub, index) in item.child" :key="index" 
                     class="sub-comments"
                     :item="sub"
-                    :toggle="false"
+                    :toggle="!deepToggle"
                 />
             </div>
             
         </div>
-        <div class="btn-left" v-if="!toggle && childLength" @click="allComments">Показать еще</div>
+        <div class="btn-left" v-if="!childProp && childLength" @click="allComments">Показать еще</div>
         <transition name="popup">
             <div v-if="reportState" class="report">
                 <div>
@@ -63,17 +63,15 @@ export default {
     },
     data() {
         return {
-            deepCounter: 1,
             answerToggle: false,
             answerText: '',
             reportState: false,
-            totalDeep: 0,
-            deepThree: 0,
+            childProp: true,
         }
     },
     computed: {
-        deepToggle(){
-            return this.toggle
+        deepToggle(){ 
+            return this.childProp = this.toggle
         },
         activeColor(){
             return this.item.likeCounter < 0? 'red' : 'rgb(72, 235, 72)'
@@ -84,7 +82,7 @@ export default {
     },
     methods: {
         allComments() {
-            this.toggle = true
+            this.childProp = !this.childProp
         },
         sentMessage(parentName) {
             let id = Math.floor(Math.random()*10000)
@@ -126,8 +124,6 @@ export default {
         }
     },
     mounted(){
-        this.totalDeep = this.item.child.length
-        this.deepThree++
     }
 
 }
@@ -227,7 +223,7 @@ export default {
 .btn-left {
     cursor: pointer;
     text-align: left;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     color: #7f9dca;
 }
 .btn-left:hover {

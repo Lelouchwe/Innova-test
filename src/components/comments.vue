@@ -41,9 +41,6 @@ export default {
 </script>
 
 <style>
-.container {
-    /* width: 100%; */
-}
 h1, p {
     text-align: left;
 }
