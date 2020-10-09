@@ -14,7 +14,7 @@
                 <div class="comment-nav__answere" @click="answerToggle = !answerToggle">Ответить</div>
                 <div v-if="!item.spoiler" class="btn" @click="item.spoiler = !item.spoiler">Спойлер</div>
                 <div v-else class="btn" @click="item.spoiler = !item.spoiler">Показать спойлер</div>
-                <div class="btn" @click="report">Пожаловаться</div>
+                <div class="btn" @click="report(item.id)">Пожаловаться</div>
             </div>
             <div v-if="answerToggle" class="wrap-answere">
                 <textarea 
@@ -109,7 +109,7 @@ export default {
         setDislike() {
             this.item.likeCounter --
         },
-        async report(){
+        async report(itemId){
             await new Promise(resolve => {
                 setTimeout(() => {
                     resolve()
