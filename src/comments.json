@@ -45,7 +45,7 @@
         "id": 2,
         "name": "Wick",
         "content": "something text here",
-        "likeCounter": 0,
+        "likeCounter": 2,
         "spoiler": false,
         "child": []
     },
